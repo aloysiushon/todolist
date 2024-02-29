@@ -1,8 +1,14 @@
-import React from "react";
+import React, {useState} from "react";
 
 function ToDoItem(props) {
+  const [isLineThrough, setLineThrough] = useState(false)
+  function lineThrough() {
+    setLineThrough(prevValue => {
+      return !prevValue
+    });
+  }
   return (
-    <li>{props.text}</li>
+    <li onClick={lineThrough} style={{textDecoration: isLineThrough ? "line-through" : "none"}}>{props.text}</li>
   );
 }
 
