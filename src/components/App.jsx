@@ -9,7 +9,7 @@ function App() {
   function getInput(event) {
     const newValue = event.target.value;
     setList(newValue);
-    console.log(newValue)
+    // console.log(newValue)
   }
 
   function addList() {
@@ -17,6 +17,15 @@ function App() {
       return [...prevValue, list];
     });
     setList("");
+  }
+
+  function deleteItems (id) {
+    setItems((prevValue) => {
+      return prevValue.filter((item, index) => {
+        // console.log(index);
+        return index !== id;
+      });
+    });
   }
 
   return (
@@ -32,8 +41,13 @@ function App() {
       </div>
       <div>
         <ul>
-          {items.map((item) => (
-            < ToDoItem text={item}/>
+          {items.map((item, index) => (
+            < ToDoItem
+              key={index}
+              id={index}
+              onChecked={deleteItems}
+              text={item}
+            />
           ))}
         </ul>
       </div>
